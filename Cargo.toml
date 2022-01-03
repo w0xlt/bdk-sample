@@ -6,5 +6,5 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bdk = { version = "0.15.0", default-feature = false, features = ["compiler", "all-keys", "key-value-db", "rpc"] }
+bdk = { version = "0.15.0", default-feature = false, features = ["all-keys", "compact_filters", "compiler", "key-value-db", "rpc"] }
 dirs-next = "2.0"
