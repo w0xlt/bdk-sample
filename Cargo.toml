@@ -6,5 +6,6 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bdk = { version = "0.15.0", default-feature = false, features = ["all-keys", "compact_filters", "compiler", "key-value-db", "rpc"] }
+bdk = { version = "0.15.0", default-feature = false, features = ["all-keys", "compact_filters", "compiler", "key-value-db", "rpc", "use-esplora-ureq"] }
 dirs-next = "2.0"
+env_logger="0.9.0"

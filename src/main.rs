@@ -1,11 +1,13 @@
 #![allow(unused_imports)]
 
-use bdk::bitcoin::Network;
+use bdk::{bitcoin::Network, keys::{GeneratedKey, bip39::{Mnemonic, WordCount, Language}}, miniscript};
+use bdk::keys::GeneratableKey;
 
 mod wallet_electrum;
 mod wallet_core;
 mod wallet_common;
 mod wallet_neutrino;
+mod wallet_esplora;
 
 fn run_rpc_core() {
     let network = Network::Signet;
@@ -30,6 +32,16 @@ fn run_electrum() {
     wallet_electrum::run(network, electrum_url, mnemonic_words);
 }
 
+fn run_esplora() {
+    let network = Network::Testnet;
+
+    let mnemonic_words = "stuff will crystal safe camera engage cereal measure gaze abstract mass embrace";
+
+    let esplora_url = "https://blockstream.info/testnet/api";
+
+    wallet_esplora::run(network, esplora_url, mnemonic_words);
+}
+
 fn run_neutrino() {
     // let network = Network::Bitcoin;
     let network = Network::Testnet;
@@ -45,11 +57,25 @@ fn run_neutrino() {
 
 fn main() {
 
+    env_logger::init();
+
     // Choose connection method
 
     // run_rpc_core();
 
     // run_neutrino();
 
-    run_electrum();
+    // run_electrum();
+
+    run_esplora();
+
+    /*
+    let mnemonic: GeneratedKey<_, miniscript::Segwitv0> = Mnemonic::generate((WordCount::Words12, Language::English)).unwrap();
+
+    // Convert mnemonic to string
+    let mnemonic_words = mnemonic.to_string();
+
+    let (receive_desc, change_desc) = wallet_common::get_descriptors(&Network::Testnet, &mnemonic_words);
+    println!("mnemonic: {}\n\nrecv desc: {:#?}\n\nchng desc: {:#?}", mnemonic_words, receive_desc, change_desc);
+    */
 }
